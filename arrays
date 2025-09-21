@@ -1,0 +1,62 @@
+#include <iostream>// Librería para usar cout
+using namespace std;// Para no escribir std:: en cada cout
+
+//aqui declaro mis funciones 
+void modificaarray(bool arra[], int tam);//esta es mi función para booleanos
+void modificaarray(int arra[], int tam);//para los enteros 
+
+int main() {
+    //array de 5 bool
+    bool arreglobool[5];//este es mi array de 5 posiciones tipo bool
+
+    //se manda llamar la funcion para modificarlos 
+    modificaarray(arreglobool, 5);
+
+    //se muestra el contenido de array 
+    cout << "array de booleanos:" << endl;
+    for (int i = 0; i < 5; i++) {//va recorriendo el array de 0 a 4
+    
+    //imprime si es verdadero o falso 
+        cout << "indice " << i << ": " << (arreglobool[i] ? "true" : "false") << endl;
+    }
+
+    //este es el array de 10 enteros 
+    int arregloenteros[10];//aqui esta el array de 10 bool
+    for (int i = 0; i < 10; i++) {
+        arregloenteros[i] = i;//va llenando el array 
+    }
+
+    //manda a llamar la funcion para enteros
+    modificaarray(arregloenteros, 10);
+
+    //muestra el resultado y las direcciones de memoria 
+    cout << "\narray de enteros tras aplicar %2:" << endl;
+    for (int i = 0; i < 10; i++) {
+        //nos muestra la direccion de memoria y pues claramente el valor calculado 
+        cout << "direccion: " << (arregloenteros + i) 
+             << " valor: " << arregloenteros[i] << endl;
+    }
+
+    return 0;  //y como dijo mi ex, terminamos 
+}
+
+//aqui son las definiciones de mis funciones 
+
+//es la funcion que recibe un array de booleano
+void modificaarray(bool arra[], int tam) {
+    for (int i = 0; i < tam; i++) {//va recorriendo cada posicion 
+        if (i % 2 == 0) {//ve si es par 
+            arra[i] = false;//aqui dice si es false 
+        } else {// ve si es impar 
+            arra[i] = true;//aqui ve si es verdadero
+        }
+    }
+}
+
+// es lo del 1.4 al 1.8 
+void modificaarray(int arra[], int tam) {
+    int* ptr = arra;// aqui es el puntero aux que apunta al del inicio delarray 
+    for (int i = 0; i < tam; i++) {    
+        *(ptr + i) = *(ptr + i) % 2;// aqui se remplaza el valor 
+    }
+}
