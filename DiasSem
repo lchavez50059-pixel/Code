@@ -1,0 +1,64 @@
+#include <iostream>//librería para usar cout 
+#include <ctime>//es una libreria para la hora 
+using namespace std;//nos ayuda para la hora de imprimir solo sea con un cout 
+
+//aqui se declaran mis variables 
+void imprimirlunes();//imprime lo del lunes 
+void imprimirjueves(int hora, int min); //imprime lo del jueves con sus requisitos 
+void verificarmartes(int dia, int hora);//es lo del martes y verifica la hora y asi 
+
+int main() {  
+    int dia = 3; //es mi variable para los dias de la semana del 0 al 6 
+
+    //la hora que es 
+    time_t t = time(0);//es para lo del tiempo actual 
+    tm* ahora = localtime(&t);//es para que se vea lindo 
+    int hora = ahora->tm_hour;//es el que noa ayuda a guardar nuestra hora 
+    int minuto = ahora->tm_min;//lo mismo que el de arriba pero para los numeros 
+   
+
+    //este if nos ayuda por si es lunes 
+    if (dia == 0) {// hace la comprovacion de si es lunes y pues es el dia 0 
+        imprimirlunes();//llama la funcion de si es lunes 
+    }
+
+  //es lo del jueves 
+    if (dia == 3) {//ve si el dia es jueves 
+        imprimirjueves(hora, minuto); //manda llamar la funcion para verificar la hora 
+    }
+
+    //verifica si es martes 
+    verificarmartes(dia, hora); //manda llamar la funcion y  revisa si es martes o después del mediodía
+
+    //este es para recoorer todos los dias 
+    string diassemana[7] = {"lunes","martes","miércoles","jueves","viernes","sábado","domingo"}; // es mi array con nombres de los días
+    for (int i = 0; i < 7; i++) {//recorre los 7 días (0 a 6)
+        if (i == dia) {// es para ver si el índice coincide con el día actual
+            cout << "Hoy sí es " << diassemana[i] << endl; // te dice que si es ese dia 
+        } else {// si no es 
+            cout << "Hoy no es " << diassemana[i] << endl;// para decir que hoy no es ese dia 
+        }
+    }
+
+    return 0; //el programa terminó correctamente
+}
+
+// definiciones 
+void imprimirlunes() {  
+    cout << "es lunes" << endl; //nos muestra el mensaje "es lunes"
+}
+
+void imprimirjueves(int hora, int min) {  
+    // comprueba si la hora es menor a 12 o exactamente 11:59 o antes
+    if (hora < 12 || (hora == 11 && min <= 59)) {  
+        cout << "es jueves antes del mediodía" << endl; //da el mensaje 
+    }  
+}
+
+void verificarmartes(int dia, int hora) {  
+    if (dia == 1) { // si el día es martes (1)
+        cout << "es martes" << endl;//imprime "es martes"
+    } else if (hora >= 12) {// si no es martes pero la hora es 12 o más
+        cout << "no es martes pero es después de las 12 PM" << endl; // imprime el mensaje correspondiente
+    }  
+}
