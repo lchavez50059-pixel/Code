@@ -1,44 +1,58 @@
 #include <iostream>
-#include "DynamicArray.h"
-#include "LinkedList.h"
-#include "PrintArray.h"
+#include "Figuras.h"
 using namespace std;
 
-int main() {
-    cout << "*****TEST DynamicArray*****" << endl;
+int main()
+{
+    cout << "Aqui es la prueba de herencia para figuras ";
 
-    DynamicArray<int> myArray;
+    //circulo 
+    Figura* f1 = new Circulo(5.0f);
+    cout << f1->ObtenerNombreDeFigura() << endl;
+    cout << "area: " << f1->CalcularArea() << endl;
+    cout << "perimetro: " << f1->CalcularPerimetro() << endl << endl;
 
-    //agregamos elementos
-    myArray.Append(1984);
-    myArray.push_back(2025);
 
-    cout << "elemento 0: " << myArray[0] << endl;
-    cout << "elemento 1: " << myArray[1] << endl;
+    //cuadrado 
+    Figura* f2 = new Cuadrado(4.0f);
+    cout << f2->ObtenerNombreDeFigura() << endl;
+    cout << "area: " << f2->CalcularArea() << endl;
+    cout << "perimetro: " << f2->CalcularPerimetro() << endl << endl;
 
-    myArray.pop_back();//eliminamos ultimo
-    cout << "despues de pop_back, size = " << myArray.Size() << endl;
 
-#if COUNT_DYNAMIC_ARRAY_COPIES != 0
-    cout << "copias ya hechas: " << myArray.getCopyCount() << endl;
-#endif
+    //figuna de n lados 
+    Figura* f3 = new FiguraNLados(6, 3.0f);//hexagono regular
+    cout << f3->ObtenerNombreDeFigura() << endl;
+    cout << "area: " << f3->CalcularArea() << endl;
+    cout << "perimetro: " << f3->CalcularPerimetro() << endl << endl;
 
-    cout << "\n*****TEST LinkedList*****" << endl;
 
-    LinkedList<int> lista;
+    //cubo
+    Cubo* cub = new Cubo(2.5f);
+    cout << cub->ObtenerNombreDeFigura() << endl;
+    cout << "area: " << cub->CalcularArea() << endl;
+    cout << "perimetro: " << cub->CalcularPerimetro() << endl;
+    cout << "volumen del cubo: " << cub->Volumen() << endl;
+    cout << "superficie total: " << cub->Surface() << endl << endl;
 
-    //agregamos elementos al inicio
-    lista.push_front(10);
-    lista.push_front(20);
-    lista.push_front(30);
 
-    lista.Print();//imprime lista
-    lista.pop_front();//quitamos primer nodo
-    lista.Print();
+    //linea
+    float segmentos[] = { 2.5f, 1.0f, 3.3f, 4.2f };
+    Figura* linea = new Linea(segmentos, 4);
 
-    cout << "\n*****TEST PrintArray*****" << endl;
-    int arr[] = {1, 2, 3, 4, 5};
-    PrintArray(arr, 5);//este imprime arreglo normal
+    cout << linea->ObtenerNombreDeFigura() << endl;
+    cout << "area: " << linea->CalcularArea() << endl;
+    cout << "perimetro: " << linea->CalcularPerimetro() << endl << endl;
 
-    return 0;//ojala y saque un 1000000/10 que ahora si estuvo para inmortales 
+
+    //aquie es donde se va a liberAR MEMORIA 
+    delete f1;
+    delete f2;
+    delete f3;
+    delete cub;
+    delete linea;
+
+    cout << "Se terminaron las pruebas, no vuelva pronto por favor " << endl;
+
+    return 0;
 }
