@@ -1,58 +1,57 @@
 #include <iostream>
-#include "Figuras.h"
+#include "HashTableChaining.h"
+#include "HashSet.h"
+#include "BinarySearchTree.h"
+
 using namespace std;
 
 int main()
 {
-    cout << "Aqui es la prueba de herencia para figuras ";
+    cout << "PRUEBAS" << endl;
+    
+    HashSet<int> conjunto(10);
 
-    //circulo 
-    Figura* f1 = new Circulo(5.0f);
-    cout << f1->ObtenerNombreDeFigura() << endl;
-    cout << "area: " << f1->CalcularArea() << endl;
-    cout << "perimetro: " << f1->CalcularPerimetro() << endl << endl;
+    cout << "Agregando 5..." << endl;
+    cout << (conjunto.Add(5) ? "Insertado" : "Ya existe") << endl;
 
+    cout << "Agregando 10..." << endl;
+    cout << (conjunto.Add(10) ? "Insertado" : "Ya existe") << endl;
 
-    //cuadrado 
-    Figura* f2 = new Cuadrado(4.0f);
-    cout << f2->ObtenerNombreDeFigura() << endl;
-    cout << "area: " << f2->CalcularArea() << endl;
-    cout << "perimetro: " << f2->CalcularPerimetro() << endl << endl;
+    cout << "Agregando 5 otra vez..." << endl;
+    cout << (conjunto.Add(5) ? "Insertado" : "Ya existe") << endl;
 
+    cout << "Contenido del HashSet:" << endl;
+    conjunto.Print();
 
-    //figuna de n lados 
-    Figura* f3 = new FiguraNLados(6, 3.0f);//hexagono regular
-    cout << f3->ObtenerNombreDeFigura() << endl;
-    cout << "area: " << f3->CalcularArea() << endl;
-    cout << "perimetro: " << f3->CalcularPerimetro() << endl << endl;
+    cout << "Buscando 10: " << (conjunto.Contains(10) ? "Encontrado" : "No esta") << endl;
+    cout << "Eliminando 10..." << endl;
+    conjunto.Remove(10);
+    cout << "Buscando 10: " << (conjunto.Contains(10) ? "Encontrado" : "No esta") << endl;
 
+    cout << "PRUEBAS AGAIN BST" << endl;
 
-    //cubo
-    Cubo* cub = new Cubo(2.5f);
-    cout << cub->ObtenerNombreDeFigura() << endl;
-    cout << "area: " << cub->CalcularArea() << endl;
-    cout << "perimetro: " << cub->CalcularPerimetro() << endl;
-    cout << "volumen del cubo: " << cub->Volumen() << endl;
-    cout << "superficie total: " << cub->Surface() << endl << endl;
+    BinarySearchTree<int> arbol;
 
+    arbol.Add(50);
+    arbol.Add(30);
+    arbol.Add(70);
+    arbol.Add(20);
+    arbol.Add(40);
+    arbol.Add(60);
+    arbol.Add(80);
 
-    //linea
-    float segmentos[] = { 2.5f, 1.0f, 3.3f, 4.2f };
-    Figura* linea = new Linea(segmentos, 4);
+    cout << "PostOrder ITERATIVO" << endl;
+    arbol.PostOrderIterativo();
 
-    cout << linea->ObtenerNombreDeFigura() << endl;
-    cout << "area: " << linea->CalcularArea() << endl;
-    cout << "perimetro: " << linea->CalcularPerimetro() << endl << endl;
+    cout << "Search ITERATIVO" << endl;
+    cout << (arbol.SearchIterativo(40) ? "40 encontrado" : "40 no esta") << endl;
+    cout << (arbol.SearchIterativo(100) ? "100 encontrado" : "100 no esta") << endl;
 
+    cout << "Borrar SUBARBO" << endl;
+    arbol.BorrarSubarbol(30);
 
-    //aquie es donde se va a liberAR MEMORIA 
-    delete f1;
-    delete f2;
-    delete f3;
-    delete cub;
-    delete linea;
-
-    cout << "Se terminaron las pruebas, no vuelva pronto por favor " << endl;
+    cout << "PostOrder después de borrar" << endl;
+    arbol.PostOrderIterativo();
 
     return 0;
 }
